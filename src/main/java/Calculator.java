@@ -37,16 +37,27 @@ public class Calculator {
                 double price;
                 System.out.println("Введите его стоимость.\nСтоимость должна быть в формате 10.45");
                 scanner.useLocale(Locale.US);
+
                 while (!scanner.hasNextDouble()) {
                     System.out.println("Введите корректное число.");
                     scanner.next();
                 }
+
                 price = scanner.nextDouble();
-                sum += price;
-                products.add(new Product(name, price));
-                scanner.nextLine();
+
+                if (price > 0) {
+                    sum += price;
+                    products.add(new Product(name, price));
+                    scanner.nextLine();
+
+                } else {
+                    System.out.println("Стоймость не может быть отрицательной. Пожалуйста, введите корректное число.");
+                    continue;
+                }
+
                 System.out.println("Товар успешно добавлен, добавить еще один? (да/нет)");
                 String answer = readNonEmptyInput(scanner);
+
                 if (answer.equalsIgnoreCase("да")) {
                     break;
                 } else {
